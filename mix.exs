@@ -53,7 +53,7 @@ defmodule Rummage.Phoenix.Mixfile do
     [
       {:phoenix, "~> 1.4.0 or ~> 1.5.0"},
       {:phoenix_html, "~> 2.14"},
-      {:rummage_ecto, "~> 2.0"},
+      {:rummage_ecto, git: "https://github.com/acolin/rummage_ecto.git"},
       {:jason, "~> 1.2", only: [:dev, :test]},
       {:credo, "~> 0.5", only: [:dev, :test]},
       {:ex_doc, "~> 0.14", only: :dev, runtime: false},
