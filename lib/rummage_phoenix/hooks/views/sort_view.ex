@@ -70,18 +70,18 @@ defmodule Rummage.Phoenix.SortView do
 
     if sort_params.name == Atom.to_string(field) do
       case sort_params.order do
-        "asc" ->
+        :asc ->
           rummage_params =
             rummage_params
-            |> Map.put(:sort, %{name: field, order: "desc"})
+            |> Map.put(:sort, %{field: field, name: field, order: "desc"})
 
           url = index_path(opts, [conn, :index, %{rummage_key => rummage_params}])
           sort_text_or_image(url, [img: desc_icon, text: desc_text], name)
 
-        "desc" ->
+        :desc ->
           rummage_params =
             rummage_params
-            |> Map.put(:sort, %{name: field, order: "asc"})
+            |> Map.put(:sort, %{field: field, name: field, order: "asc"})
 
           url = index_path(opts, [conn, :index, %{rummage_key => rummage_params}])
           sort_text_or_image(url, [img: asc_icon, text: asc_text], name)
@@ -89,7 +89,7 @@ defmodule Rummage.Phoenix.SortView do
     else
       rummage_params =
         rummage_params
-        |> Map.put(:sort, %{name: field, order: "asc"})
+        |> Map.put(:sort, %{field: field, name: field, order: "asc"})
 
       url = index_path(opts, [conn, :index, %{rummage_key => rummage_params}])
       sort_text_or_image(url, [], name)
