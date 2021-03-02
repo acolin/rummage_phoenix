@@ -46,9 +46,9 @@ defmodule Rummage.Phoenix.SearchView do
   ```
   """
   def search_form(conn, rummage, link_params, opts \\ []) do
-    search = rummage["search"]
-    sort = if rummage["sort"], do: Poison.encode!(rummage["sort"]), else: ""
-    paginate = if rummage["paginate"], do: Poison.encode!(rummage["paginate"]), else: ""
+    search = rummage[:search]
+    sort = if rummage[:sort], do: Poison.encode!(rummage[:sort]), else: ""
+    paginate = if rummage[:paginate], do: Poison.encode!(rummage[:paginate]), else: ""
 
     button_class = Keyword.get(link_params, :button_class, "btn btn-primary")
     button_label = Keyword.get(link_params, :button_label, "Search")
