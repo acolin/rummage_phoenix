@@ -52,7 +52,7 @@ defmodule Rummage.Phoenix.SearchView do
 
     button_class = Keyword.get(link_params, :button_class, "btn btn-primary")
     button_label = Keyword.get(link_params, :button_label, "Search")
-    form_class = Keyword.get(link_params, :form_class, "form-inline")
+    form_class = Keyword.get(link_params, :form_class, "col-12 row d-flex justify-content-end")
     fields = Keyword.fetch!(link_params, :fields)
 
     form_for(

@@ -38,7 +38,7 @@ This is [available in Hex](https://hexdocs.pm/rummage_phoenix/), the package can
     ```elixir
     def deps do
       [
-        {:rummage_phoenix, "~> 1.2.0"}
+        {:rummage_phoenix, git: "https://github.com/acolin/rummage_phoenix.git"}
       ]
     end
     ```
@@ -87,6 +87,7 @@ for all the models, add it to `model` function in `web.ex`
   defmodule MyApp.ProductController do
     use MyApp.Web, :controller
     use Rummage.Phoenix.Controller
+    alias Rummage.Phoenix.Params
 
     # More code below....
   end
@@ -97,7 +98,7 @@ for all the models, add it to `model` function in `web.ex`
   ```elixir
   def index(conn, params) do
     {query, rummage} = Product
-      |> Rummage.Ecto.rummage(params["rummage"])
+      |> Params.get(params["rummage"])
 
     products = Repo.all(query)
 
@@ -192,16 +193,10 @@ Please check the [screenshots](#more-screenshots) below for details
 
   With:
   ```elixir
-    <th><%= sort_link @conn, @rummage, [field: :name, ci: true] %></th>
-    <th><%= sort_link @conn, @rummage, [field: :price] %></th>
+    <th><%= sort_link @conn, @rummage, :name, "Name" %></th>
   ```
 
-  OR for Sort by associations:
-  ```elixir
-    <th><%= sort_link @conn, @rummage, [field: :name, name: "Category Name", assoc: ["category"]] %></th>
-  ```
-
-  Reload and this is how your page should look with sortable links instead of just table headers:
+    Reload and this is how your page should look with sortable links instead of just table headers:
 
   ![phoenix sorting](src/images_1.0/RummagePhoenixSort.gif)
 
@@ -212,11 +207,11 @@ Please check the [screenshots](#more-screenshots) below for details
   Add a search form in the `index.html.eex` with searchable fields:
 
   ```elixir
-  <%= search_form(@conn, @rummage, [fields:
+  <%= search_form(@conn, @rummage, [fields: 
   [
-    name: %{label: "Search by Product Name", search_type: "ilike"},
-    price: %{label: "Search by Price", search_type: "eq"},
-  ], button_class: "btn",
+    number: %{label: "Search by Product Name", search_type: "ilike"},
+    customer_fullname: %{label: "Search by Price", search_type: "ilike"}
+  ], button_class: "btn btn-success"
   ]) %>
   ```
   OR for Search by associations:
