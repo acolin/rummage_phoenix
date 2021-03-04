@@ -1,11 +1,12 @@
 defmodule Rummage.Phoenix.Params do
   def get(opts, defaults) do
-    opts
-    |> merge_params("paginate", defaults)
-    |> merge_params("search", defaults)
-    |> merge_params("sort", defaults)
-    |> merge_params("params", defaults)
-    |> convert_to_atom_map()
+    base = opts
+           |> merge_params("paginate", defaults)
+           |> merge_params("search", defaults)
+           |> merge_params("sort", defaults)
+           |> merge_params("params", defaults)
+           |> convert_to_atom_map()
+    Map.put(base, :params, base)
   end
 
   defp merge_params(opts, type, defaults) do
